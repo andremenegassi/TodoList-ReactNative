@@ -8,10 +8,19 @@ import styles from './src/components/styles';
 
 export default class App extends Component{
   
+  constructor(props)
+  {
+    super(props);
+
+    this.state = {
+      item:"aaaa"
+    }
+
+  }
 
   add(){
 
-      alert("adddllll");
+      alert(this.state.item);
   }
 
 
@@ -24,12 +33,16 @@ export default class App extends Component{
         <Text style={styles.inputs.label}>
           Item
         </Text>
-        <TextInput style={styles.inputs.textBox} placeholder="digite aqui"  />
-        <MyButton label="+" onPress={this.add}></MyButton>
+        <TextInput 
+          style={styles.inputs.textBox} 
+          placeholder="digite aqui"
+          onChangeText={(value) => this.setState({item:value})} 
+          value={this.state.item} />
+        <MyButton label="+" onPress={this.add.bind(this)}></MyButton>
         
         </View>
         <View>
-            <Text>Items:</Text>
+            <Text>Items:{this.state.item}</Text>
         </View>
       </View>
 
