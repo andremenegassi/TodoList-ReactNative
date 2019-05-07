@@ -1,10 +1,12 @@
 
 import React, {Component} from 'react';
-import {Text, View, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import {Text, View, TextInput, FlatList } from 'react-native';
 
 import MyButton from "./src/components/MyButton";
 
 import styles from './src/components/styles';
+
+
 
 export default class App extends Component{
   
@@ -13,15 +15,54 @@ export default class App extends Component{
     super(props);
 
     this.state = {
-      item:"aaaa"
+      item:"",
+      dados:[]
     }
 
   }
 
+  guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
+
   add(){
 
-      alert(this.state.item);
+      this.state.dados.push({id: this.guid(), item: this.state.item});
+      this.setState({
+        item: "",
+        dados: this.state.dados
+      });
   }
+
+  remove(itemRemove){
+    
+      let pos = this.state.dados.findIndex((item) => {
+
+          if (itemRemove.id == item.id)
+          {
+            return true;
+          }
+      });
+
+      if (pos > -1){
+
+        this.state.dados.splice(pos,1);
+
+        this.setState({
+          dados: this.state.dados
+        });
+  
+      }
+
+    
+  }
+
 
 
   render() {
@@ -42,8 +83,24 @@ export default class App extends Component{
         
         </View>
         <View>
-            <Text>Items:{this.state.item}</Text>
+        <Text>{this.state.dados.length}</Text>
+       
+        <FlatList
+            data={this.state.dados}
+            extraData={this.state}
+            keyExtractor={(item) => { return item.id; }}
+            renderItem={({ item }) => {
+              return (<View>
+                    <Text>{item.item}</Text>
+                    <MyButton label="X" onPress={this.remove.bind(this, item)}></MyButton>
+              </View>);
+        }}
+      />
+
+
+
         </View>
+        
       </View>
 
     return html;
