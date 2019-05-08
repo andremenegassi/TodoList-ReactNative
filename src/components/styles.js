@@ -3,7 +3,9 @@ import {StyleSheet} from 'react-native';
 const container = StyleSheet.create({
 
     main: {
-        margin: 10
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 0,
     }
 
 
@@ -25,13 +27,15 @@ const inputs = StyleSheet.create({
     button: {
         margin: 10,
         marginTop: 5,
-        backgroundColor:"#3498db"
+        backgroundColor:"#3498db",
+        minWidth: 60
     },
 
     buttonLabel: {
         padding: 10,
         color: "#fff",
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 20
     }
     
 

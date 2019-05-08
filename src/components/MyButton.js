@@ -4,12 +4,14 @@ import styles from './styles';
 
 export default function MyButton(props) {
 
+    
+
     return (
 
         <TouchableOpacity 
             style={styles.inputs.button}
             onPress={props.onPress}>
-            <Text style={styles.inputs.buttonLabel}>{props.label}</Text>
+            <Text style={[styles.inputs.buttonLabel,props.style]}>{props.label}</Text>
         </TouchableOpacity>   
     ); 
 
